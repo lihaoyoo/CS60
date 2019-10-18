@@ -1,0 +1,9 @@
+accuracy = 0.8705315717378816
+batch_size = 32
+epoch = 14
+eval_loss = 1.0630025574042972
+f1 = 0.7058605341246291
+global_step = 30442
+learning_rate = 2e-05
+precision = 0.7116679132385939
+recall = 0.7001471670345842
