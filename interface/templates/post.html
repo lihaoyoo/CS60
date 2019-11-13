@@ -36,15 +36,12 @@
 <!-- The main content of the page -->
 <div class="container">
   <div class="row">
-  	
     <!-- Text area input -->
-    
     <form action="/spanbert" method="post">
         {% csrf_token %}
-
         <div class="col-sm-12" style="margin-bottom: 5px;">
         <p> Text</p>
-        <input type="text" name="paragraph" class="form-control" rows="2" placeholder="e.g., The quick brown fox jumped over the lazy dog.">
+        <textarea style="width:1000px;height:200px;" name="paragraph" class="form-control"></textarea>
         </div>
         <div class="col-sm-2" style="text-align: center; margin-top: 7px; ">
         <input type="submit" value="Submit" class="btn btn-block" onclick = "extractor()">
@@ -88,7 +85,7 @@
   {% endfor %}
     {% if rlt %}
         {% load static %}
-        <a target="_blank" href="{% static "network_graph.png" %}"><img src="{% static "network_graph.png" %}" alt="visualization" style="height:100%" id= "picture"/></a>
+        <a target="_blank" href="{% static "network_graph.png" %}"><img src="{% static "network_graph.png" %}" alt="visualization" id= "picture"/></a>
     {% endif %}
     
   <!-- Patterns -->
@@ -164,8 +161,7 @@
 <script>
     function extractor()
     {
-        document.getElementById("picture").style.display="none";
         document.getElementById("result").style.display="none";
-        
+        document.getElementById("picture").style.display="none";
     }
 </script>

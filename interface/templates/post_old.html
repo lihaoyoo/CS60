@@ -1,37 +1,3 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Entity and relation extractor</title>
-</head>
-<body>
-    <form action="/search-post" method="post">
-        {% csrf_token %}
-        <input type="text" name="paragraph">
-        <input type="submit" value="Submit">
-    </form>
- 
-    <p>{{ rlt }}</p>
-
-	<div class="container">
-		<div class="row">
-
-
-    	<form id="form_annotate" accept-charset="UTF-8" onsubmit="return false;">
-    	<div class="col-sm-12" style="margin-bottom: 5px;">
-      		<label for="text" class="label">&mdash; Text to annotate &mdash;</label>
-      		<textarea class="form-control" rows="2" id="text" placeholder="e.g., The quick brown fox jumped over the lazy dog." autofocus></textarea>
-    	</div>
-
-    <div class="col-sm-2" style="text-align: center; margin-top: 7px; ">
-        <button id="submit" class="btn btn-block">Submit</button>
-    </div>
-    </form>
-
-</body>
-</html> -->
-
-
 <head>
   <!-- JQuery -->
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -62,7 +28,7 @@
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="https://nlp.stanford.edu/software/corenlp.shtml">Entity and relation extractor</a>
+      <a class="navbar-brand">Entity and relation extractor</a>
     </div>
   </div>
 </nav>
@@ -73,18 +39,17 @@
   	
     <!-- Text area input -->
     
-    <form action="/search-post" method="post">
+    <form action="/spanbert" method="post">
         {% csrf_token %}
 
         <div class="col-sm-12" style="margin-bottom: 5px;">
-        <p> Text to annotate</p>
+        <p> Text</p>
         <input type="text" name="paragraph" class="form-control" rows="2" placeholder="e.g., The quick brown fox jumped over the lazy dog.">
         </div>
         <div class="col-sm-2" style="text-align: center; margin-top: 7px; ">
-        <input type="submit" value="Submit" class="btn btn-block">
+        <input type="submit" value="Submit" class="btn btn-block" onclick = "extractor()">
         </div>
     </form>
-    
     
     <!-- <form action="/search-post" method="post" id="form_annotate" accept-charset="UTF-8" onsubmit="return false;" >
     {% csrf_token %}
@@ -117,12 +82,15 @@
     <div id="annotations" class="row" style="display:none">
     </div>
   </div>
-  <!-- <p>{{rlt}}</p> -->
+<!--   <p>{{rlt}}</p> -->
   {% for r in rlt %}
-  	<p>{{ r }}</p >
+        <p id = "result">{{ r }}</p >
   {% endfor %}
-
-
+    {% if rlt %}
+        {% load static %}
+        <a target="_blank" href="{% static "network_graph.png" %}"><img src="{% static "network_graph.png" %}" alt="visualization" style="height:100%" id= "picture"/></a>
+    {% endif %}
+    
   <!-- Patterns -->
   <div id="patterns_row" class="row" hidden>
     <!-- Nav tabs -->
@@ -192,3 +160,12 @@
 </footer>-->
 			
 </body>
+
+<script>
+    function extractor()
+    {
+        document.getElementById("picture").style.display="none";
+        document.getElementById("result").style.display="none";
+        
+    }
+</script>

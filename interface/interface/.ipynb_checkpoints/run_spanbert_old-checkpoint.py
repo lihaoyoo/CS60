@@ -20,9 +20,9 @@ def spanbert(request):
         text = request.POST['paragraph']
         res = extract_entity_sentence(text)
         result = transfer_to_multi_relation(res)
+        data_path = "/home/jupyter/Spanbert/tacred"
         with open('/home/jupyter/Spanbert/tacred/preprocessing_data.json', 'w', encoding='utf-8') as f:
             json.dump(result, f)
-        data_path = "/home/jupyter/Spanbert/tacred"
         run_tacred_1.main(data_path)
         with open('/home/jupyter/Spanbert/output/predictions.json', 'r') as f:
              data = json.load(f)
@@ -140,7 +140,7 @@ def visualization():
         G.add_node(i["entity1"], type= "entity",color="red")
         G.add_node(i["entity2"], type= "entity",color="red")
     for i in d:
-        G.add_edge(i["entity1"],i["entity2"],label=i["relation"]+"\nscore:"+str(i['score']))  
+        G.add_edge(i["entity1"],i["entity2"],label=i["relation"])  
     #Set layout and draw graph
     G.layout(prog='dot') 
     G.draw('/home/jupyter/interface/static/network_graph.png')
